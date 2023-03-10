@@ -23,7 +23,6 @@
 #include <BlynkSimpleEsp32.h>
 
 #include <Wire.h>
-#include <SFE_MicroOLED.h>
 #include <PMS.h>
 #include <DHT.h>
 #include <HardwareSerial.h>
@@ -36,10 +35,6 @@ PMS::DATA data;
 #define DHTTYPE DHT22 // DHT 22  (AM2302), AM2321
 
 DHT dht(DHTPIN, DHTTYPE);
-
-#define PIN_RESET -1
-#define DC_JUMPER 0
-MicroOLED oled(PIN_RESET, DC_JUMPER);
 
 unsigned long previousMillis = 0;
 
@@ -122,11 +117,6 @@ void setup()
   SerialPort.begin(9600, SERIAL_8N1, 25, 27);
 
   dht.begin();
-  Wire.begin();
-
-  oled.begin();
-  oled.clear(PAGE);
-  oled.clear(ALL);
 
   digitalWrite(16, HIGH);
   digitalWrite(17, HIGH);
