@@ -1,12 +1,12 @@
 /*************************************************************
 
-PMS7003 
-TX  -> 25
-RX  -> 27
-GND -> GND
-VCC -> VCC
+  PMS7003
+  TX  -> 25
+  RX  -> 27
+  GND -> GND
+  VCC -> VCC
 
-DHT -> 23
+  DHT -> 26
  *************************************************************/
 
 /* Comment this out to disable prints and save space */
@@ -32,7 +32,7 @@ HardwareSerial SerialPort(1); // use UART1
 PMS pms(SerialPort);
 PMS::DATA data;
 
-#define DHTPIN 23
+#define DHTPIN 26
 #define DHTTYPE DHT22 // DHT 22  (AM2302), AM2321
 
 DHT dht(DHTPIN, DHTTYPE);
@@ -58,68 +58,62 @@ BLYNK_WRITE(V3)
   if (param.asInt() == 1)
   {
     digitalWrite(16, LOW );
-  }
-  else
-  {
+    delay(500);
     digitalWrite(16, HIGH);
+    Blynk.virtualWrite(V3, 0);
   }
 }
-
 BLYNK_WRITE(V4)
 {
   if (param.asInt() == 1)
   {
     digitalWrite(17, LOW );
-  }
-  else
-  {
+    delay(500);
     digitalWrite(17, HIGH);
+    Blynk.virtualWrite(V4, 0);
   }
 }
 BLYNK_WRITE(V5)
 {
   if (param.asInt() == 1)
   {
-    digitalWrite(18, LOW );
-  }
-  else
-  {
-    digitalWrite(18, HIGH);
+    digitalWrite(32, LOW );
+    delay(500);
+    digitalWrite(32, HIGH);
+    Blynk.virtualWrite(V5, 0);
   }
 }
 BLYNK_WRITE(V6)
 {
   if (param.asInt() == 1)
   {
-    digitalWrite(19, LOW );
-  }
-  else
-  {
-    digitalWrite(19, HIGH);
+    digitalWrite(33, LOW );
+    delay(500);
+    digitalWrite(33, HIGH);
+    Blynk.virtualWrite(V6, 0);
   }
 }
 BLYNK_WRITE(V7)
 {
   if (param.asInt() == 1)
   {
-    digitalWrite(21, LOW );
-  }
-  else
-  {
-    digitalWrite(21, HIGH);
+    digitalWrite(18, LOW );
+    delay(500);
+    digitalWrite(18, HIGH);
+    Blynk.virtualWrite(V7, 0);
   }
 }
 BLYNK_WRITE(V8)
 {
   if (param.asInt() == 1)
   {
-    digitalWrite(22, LOW );
-  }
-  else
-  {
-    digitalWrite(22, HIGH);
+    digitalWrite(19, LOW );
+    delay(500);
+    digitalWrite(19, HIGH);
+    Blynk.virtualWrite(V8, 0);
   }
 }
+
 
 void setup()
 {
@@ -138,14 +132,14 @@ void setup()
   digitalWrite(17, HIGH);
   digitalWrite(18, HIGH);
   digitalWrite(19, HIGH);
-  digitalWrite(21, HIGH);
-  digitalWrite(22, HIGH);
+  digitalWrite(32, HIGH);
+  digitalWrite(33, HIGH);
   pinMode(16, OUTPUT);
   pinMode(17, OUTPUT);
   pinMode(18, OUTPUT);
   pinMode(19, OUTPUT);
-  pinMode(21, OUTPUT);
-  pinMode(22, OUTPUT);
+  pinMode(32, OUTPUT);
+  pinMode(33, OUTPUT);
 
   Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
 }
@@ -154,7 +148,7 @@ void loop()
 {
   Blynk.run();
   unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= 2000) {
+  if (currentMillis - previousMillis >= 2500) {
     previousMillis = currentMillis;
 
     float humid = dht.readHumidity();
@@ -168,7 +162,7 @@ void loop()
 
     Blynk.virtualWrite(V1, temp);
     Blynk.virtualWrite(V2, humid);
-    
+
   }
 
   //------get data from PMS7003------
