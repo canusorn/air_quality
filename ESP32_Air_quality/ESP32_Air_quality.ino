@@ -40,8 +40,8 @@ unsigned long previousMillis = 0;
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "G6PD_2.4G";
-char pass[] = "570610193";
+char ssid[] = "SSID";
+char pass[] = "PASS";
 
 BLYNK_CONNECTED()
 {
