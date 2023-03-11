@@ -76,6 +76,8 @@ void setup()
 void loop()
 {
 
+  Blynk.run();
+
   //------get data from PMS7003------
   if (pms.read(data))
   {
@@ -92,6 +94,9 @@ void loop()
 
     humid = dht.readHumidity();
     temp = dht.readTemperature();
+
+    Blynk.virtualWrite(V10, humid);
+    Blynk.virtualWrite(V11, temp);
 
     Serial.print(F("Humidity: "));
     Serial.print(humid);
